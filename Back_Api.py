@@ -97,3 +97,4 @@ def do_checkin(passenger_id: int, db: Session = Depends(get_db)):
     passenger.CHECKIN_STATUS = 1
     db.commit()
     return {"message": "Check-in Successful!"}
+
