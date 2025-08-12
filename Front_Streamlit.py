@@ -54,12 +54,16 @@ def get_passenger_metrics():
     if response.status_code == 200:
         passengers = response.json()
         df = pd.DataFrame(passengers)
-        df["CHECKIN_STATUS"] = df["CHECKIN_STATUS"].apply(lambda x: "YES✅" if x == 1 else "NO❌")
-        total = len(df)
-        checkins = df["CHECKIN_STATUS"].value_counts().get("YES✅", 0)
-        return total, checkins
-    else:
-        return 0, 0
+        
+# Verifica se a coluna existe (com tratamento de erro)
+if "CHECKIN_STATUS" in df.columns:
+    df["CHECKIN_STATUS"] = df["CHECKIN_STATUS"].apply(lambda x: "YES✅" if x == 1 else "NO❌")
+    total = len(df)
+    checkins = df["CHECKIN_STATUS"].value_counts().get("YES✅", 0)
+    return total, checkins
+else:
+    return len(df), 0
+
     
 # MÉTRICAS NO TOPO
 total_passengers, checkins_done = get_passenger_metrics()
