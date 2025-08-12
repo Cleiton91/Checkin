@@ -38,9 +38,9 @@ SENHA = os.getenv ("LOG_PASSWORD")
 params = st.query_params
 if "auth" not in params or params["auth"][0] != "1":
     st.title("Login")
-    user = st.text_input("Usuário")
-    password = st.text_input("Senha", type="password")
-    if st.button("Entrar"):
+    user = st.text_input("User")
+    password = st.text_input("Password", type="password")
+    if st.button("Enter"):
         if user == USUARIO and password == SENHA:
             st.query_params["auth"] = "1"
             st.rerun()
@@ -74,7 +74,7 @@ st.title("Boarding System")
 
 # FORMULÁRIO DE REGISTRO 
 with st.form(key='register_form',clear_on_submit=True):
-    st.subheader("📋 Registrar Passageiro")
+    st.subheader("📋 Register Passenger")
     name = st.text_input("Name")
     flight = st.text_input("Flight")
     origin = st.text_input("Origin")
